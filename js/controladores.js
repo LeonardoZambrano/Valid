@@ -3,10 +3,10 @@
 // controlador principal
 app.controller('controladorPrincipal', ['$rootScope', '$scope', 'sesionesControl', 'mensajesFlash' , function($rootScope,$scope, sesionesControl, mensajesFlash){
     $rootScope.alerts = [];
-    $scope.nombre = "";
+    $scope.username = "";
     var usuarioInfo = sesionesControl.getList("usuario");
     if(usuarioInfo != null){
-        $scope.nombre = usuarioInfo.nombre;
+        $scope.username = usuarioInfo.username;
     }
     $scope.inf = "";
 
@@ -22,30 +22,30 @@ app.controller('controladorPrincipal', ['$rootScope', '$scope', 'sesionesControl
 }]);
 
 // controlador para la navegacion
-app.controller('menuControlador', ['$scope', '$location','sesionesControl', function ($scope, $location, sesionesControl) {  
-  $scope.navClass = function (page, isParent) {    
+app.controller('menuControlador', ['$scope', '$location','sesionesControl', function ($scope, $location, sesionesControl) {
+  $scope.navClass = function (page, isParent) {
     var currentRoute = $location.path().substring(1) || 'home';
-    if(isParent){        
+    if(isParent){
         return currentRoute.indexOf(page) != -1 ? 'active' : '';
     }else{
         if(currentRoute.indexOf(page) != -1){
           return 'active'
         }else{
-          return (currentRoute.indexOf(page.substring(0,page.length-1)) || currentRoute.indexOf(page.substring(0,page.length-2))) != -1 ? 'active' : ''; 
+          return (currentRoute.indexOf(page.substring(0,page.length-1)) || currentRoute.indexOf(page.substring(0,page.length-2))) != -1 ? 'active' : '';
         }
     }
-    
+
   };
 
   $scope.expand = function (page) {
     var currentRoute = $location.path().substring(1) || 'home';
     var expandeStyle = currentRoute.indexOf(page) != -1 ? 'block' : 'hidden';
     return expandeStyle;
-  };  
-  
+  };
+
   // Efecto slide en menu principal
-  angular.element(document).ready(function () {    
-    $('.sidebar-toggle-box .fa-bars').click(function (e) {            
+  angular.element(document).ready(function () {
+    $('.sidebar-toggle-box .fa-bars').click(function (e) {
             $(".leftside-navigation").niceScroll({
                 cursorcolor: "#00a3e1",
                 cursorborder: "0px solid #fff",
